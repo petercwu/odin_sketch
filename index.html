@@ -3,10 +3,38 @@
     <head>
         <meta charset="UTF-8">
         <title> Etch-a-Sketch </title>
+        <link rel="stylesheet" href="styles.css">
     </head>
     <body>
+        <div id="container"></div>
+        <button id="new-grid"> New Grid Size </button>
         <script>
-            
+            let squaresPerSide = 16;
+            const contnr = document.querySelector("#container");
+            const reset = document.querySelector("#new-grid");
+            let input = 960/squaresPerSide;
+            let gridSize = `${input}px`;
+            reset.addEventListener("click", () => {
+                squaresPerSide = prompt("Enter the numbers of squares per side");
+                console.log(squaresPerSide);
+            });
+            function createSquare() { // creates one grid that turns black when hovered
+                const grid = document.createElement("div");
+                grid.classList.add("grid");
+                grid.style.setProperty("width", gridSize);
+                grid.style.setProperty("height", gridSize);
+                grid.addEventListener("mouseover", () => {
+                    grid.style.cssText = "background-color: black";
+                    grid.style.setProperty("width", gridSize);
+                    grid.style.setProperty("height", gridSize);
+                });
+                contnr.appendChild(grid);
+            }
+            for (let rows = 0; rows < squaresPerSide; rows++) { //creates the full grid based on inputted squaresPerSide
+                for (let columns = 0; columns < squaresPerSide; columns++) {
+                    createSquare();
+                }
+            }
         </script>
     </body>
 </html>
