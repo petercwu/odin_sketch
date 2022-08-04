@@ -10,14 +10,10 @@
         <button id="new-grid"> New Grid Size </button>
         <script>
             let squaresPerSide = 16;
-            const contnr = document.querySelector("#container");
-            const reset = document.querySelector("#new-grid");
             let input = 960/squaresPerSide;
             let gridSize = `${input}px`;
-            reset.addEventListener("click", () => {
-                squaresPerSide = prompt("Enter the numbers of squares per side");
-                console.log(squaresPerSide);
-            });
+            const contnr = document.querySelector("#container");
+            const resetNewSize = document.querySelector("#new-grid");
             function createSquare() { // creates one grid that turns black when hovered
                 const grid = document.createElement("div");
                 grid.classList.add("grid");
@@ -30,11 +26,23 @@
                 });
                 contnr.appendChild(grid);
             }
-            for (let rows = 0; rows < squaresPerSide; rows++) { //creates the full grid based on inputted squaresPerSide
-                for (let columns = 0; columns < squaresPerSide; columns++) {
-                    createSquare();
+            resetNewSize.addEventListener("click", () => {
+                squaresPerSide = prompt("Enter the numbers of squares per side");
+                input = 960/squaresPerSide;
+                gridSize = `${input}px`;
+                while (contnr.firstChild) {
+                    contnr.removeChild(contnr.firstChild);
+                }
+                createGrid(squaresPerSide);
+            });
+            function createGrid(number) { //creates the full grid based on inputted squaresPerSide
+                for (let rows = 0; rows < number; rows++) { 
+                    for (let columns = 0; columns < number; columns++) {
+                        createSquare();
+                    }
                 }
             }
+            createGrid(squaresPerSide);
         </script>
     </body>
 </html>
