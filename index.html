@@ -8,12 +8,14 @@
     <body>
         <div id="container"></div>
         <button id="new-grid"> New Grid Size </button>
+        <button id="reset"> Reset </button>
         <script>
             let squaresPerSide = 16;
             let input = 960/squaresPerSide;
             let gridSize = `${input}px`;
             const contnr = document.querySelector("#container");
             const resetNewSize = document.querySelector("#new-grid");
+            const reset = document.querySelector("#reset");
             function createSquare() { // creates one grid that turns black when hovered
                 const grid = document.createElement("div");
                 grid.classList.add("grid");
@@ -30,6 +32,12 @@
                 squaresPerSide = prompt("Enter the numbers of squares per side");
                 input = 960/squaresPerSide;
                 gridSize = `${input}px`;
+                while (contnr.firstChild) {
+                    contnr.removeChild(contnr.firstChild);
+                }
+                createGrid(squaresPerSide);
+            });
+            reset.addEventListener("click", () => {
                 while (contnr.firstChild) {
                     contnr.removeChild(contnr.firstChild);
                 }
